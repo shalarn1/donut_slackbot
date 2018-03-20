@@ -15,7 +15,6 @@ class Bot(object):
               "scope": "bot"}
         self.verification = os.environ.get("VERIFICATION_TOKEN")
         self.client = SlackClient(os.environ.get("SLACK_BOT_TOKEN"))
-        # self.client = SlackClient('xoxp-331304919729-331827989908-332271438128-99451d2ab4bbd735c8b6fc17d96d90ea')
 
         # We'll use this dictionary to store the state of each message object. - task_id: assigned_by, assigned_to
         self.tasks = {}

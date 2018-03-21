@@ -23,7 +23,7 @@ class ReplyTaskRequestMessage(Message):
     """
     def __init__(self, user_id):
         super(Message, self).__init__()
-        self.text = ("Ok. I have assigned that task to {0}. I will let you know when the task has been completed.".format(user_id))
+        self.text = ("Ok. I have assigned that task to <@{0}>. I will let you know when the task has been completed.".format(user_id))
 
 class NotifyTaskCompletedMessage(Message):
     """
@@ -36,7 +36,7 @@ class NotifyTaskCompletedMessage(Message):
     """
     def __init__(self, completed_by, task):
         super(Message, self).__init__()
-        self.text = ("{0} completed the task:\n{1}".format(completed_by, task))
+        self.text = ("<@{0}> completed the task:\n{1}".format(completed_by, task))
 
 class HasCompletedMessage(Message):
     def __init__(self):
@@ -54,4 +54,4 @@ class AssignTaskMessage(Message):
     """
     def __init__(self, user_id, task):
         super(Message, self).__init__()
-        self.text = ("{0} assigned you the following task:\n\n{1}".format(user_id, task))
+        self.text = ("<@{0}> assigned you the following task:\n\n{1}".format(user_id, task))

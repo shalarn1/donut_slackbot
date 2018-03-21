@@ -172,6 +172,7 @@ class Bot(object):
                                             username=self.name,
                                             icon_emoji=self.emoji,
                                             text="",
+                                            link_names=True,
                                             attachments=complete_button
                                             )
         message_obj.timestamp = post_message["ts"]

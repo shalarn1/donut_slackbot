@@ -23,20 +23,22 @@ def _event_handler(event_type, slack_event):
     # ================ Incoming Message Events =============== #
     # When the bot recieves a message from a user, the type of event will be message
     if event_type == "message" and not slack_event["event"].get('bot_id'):
-        user_id = slack_event["event"]["user"]
-        full_message = slack_event["event"]["text"].split(' ', 1)
-        assigned_to_raw = full_message[0].strip('<').strip('>')
-        if assigned_to_raw[0] != "@":
-            pyBot.directions_message(user_id)
-            return make_response("Directions Message Sent", 200,)
-        else:
-            assigned_to = assigned_to_raw[1:]
-        task = full_message[1]
-        assigned_by = user_id
-        # Send the assignment messages
-        pyBot.assign_task_message(assigned_to, assigned_by, task)
-        pyBot.reply_task_request_message(assigned_by, assigned_to)
-        return make_response("Direct Message Sent", 200,)
+        # not message changed
+        if not slack_event["event"].get("subtype"):
+            user_id = slack_event["event"]["user"]
+            full_message = slack_event["event"]["text"].split(' ', 1)
+            assigned_to_raw = full_message[0].strip('<').strip('>')
+            if assigned_to_raw[0] != "@":
+                pyBot.directions_message(user_id)
+                return make_response("Directions Message Sent", 200,)
+            else:
+                assigned_to = assigned_to_raw[1:]
+            task = full_message[1]
+            assigned_by = user_id
+            # Send the assignment messages
+            pyBot.assign_task_message(assigned_to, assigned_by, task)
+            pyBot.reply_task_request_message(assigned_by, assigned_to)
+            return make_response("Direct Message Sent", 200,)
 
     # ============= Event Type Not Found! ============= #
     # If the event_type does not have a handler

@@ -95,7 +95,7 @@ class Bot(object):
                                             icon_emoji=self.emoji,
                                             attachments=complete_button
                                             )
-        update_message.timestamp = update_message["ts"]
+        new_message.timestamp = update_message["ts"]
 
     def notify_complete_message(self, task_id):
         self.tasks[task_id]['completed'] = True
@@ -148,7 +148,6 @@ class Bot(object):
         """
         self.task_id_count += 1
         self.tasks[self.task_id_count] = {'assigned_by': assigned_by, 'assigned_to': user_id, 'completed': False, 'content': task}
-        print self.tasks
         message_obj = message.AssignTaskMessage(assigned_by, task)
         message_obj.channel = self.open_dm(user_id)
         #"url": "https://roach.ngrok.io/completed/" + self.task_id_count,
